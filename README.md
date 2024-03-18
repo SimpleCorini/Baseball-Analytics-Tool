@@ -15,6 +15,7 @@
 
 ### Tech Stack
 |Scheduled to be uploaded later|
+|:--:|:--|
 
 ### ERD
 |Scheduled to be uploaded later|
