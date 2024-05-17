@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\shimyunseop\PycharmProjects\demo\.venv"
+@set "VIRTUAL_ENV=C:\Users\shimyunseop\PycharmProjects\Baseball-Analytics-Tool\back_end\.venv"
 
 @set "VIRTUAL_ENV_PROMPT="
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (
