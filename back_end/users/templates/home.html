@@ -2,14 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Baseball Google Sign in</title>
+    <style>
+        .menu {
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        .menu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        .menu a:not(:last-child) {
+            border-right: 1px solid #ccc;
+        }
+        .menu {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
+    <div class="menu">
+        <a href="#baseball">Baseball</a>
+        <a href="#analysis">팀 전력분석</a>
+        <a href="#predictions">경기 예측</a>
+        <a href="#matchups">투수 vs 타자</a>
+        <a href="{% url 'article_list' %}">커뮤니티</a>
+    </div>
     {% load socialaccount %}
-    <h2> Google Login</h2>
+    <h2>Google Login</h2>
     <a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
-    </body>
+    {% if user.is_authenticated %}
+    <p>You are signed in as {{ user.email }}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% endif %}
+</body>
 </html>
