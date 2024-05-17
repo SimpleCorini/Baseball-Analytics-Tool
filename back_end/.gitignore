@@ -1,0 +1,10 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+*.sqlite3
+*.sqlite3-journal
+media
+client_secret_740516150064-f7uivf2mitcuje8ko745irljih77k9mo.apps.googleusercontent.com (1).json
