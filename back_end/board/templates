@@ -53,7 +53,7 @@
 <br>
 <h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">팀별 대결 기록</h2>
 <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-<img class="object-cover object-center rounded" alt="hero" src="https://lh4.googleusercontent.com/proxy/FGOONO9e6AqjWuJ1ITIki5sgnDN5mesmcYq9Kut-XhB32LqAjbX7KfkpP9feW2nEG-YAbKc3btNKWs3Pbdn_SLaKY5X2fRAygocdsz_x" style="margin-left: 990px;">
+    <img class="object-cover object-center rounded" alt="hero" src="https://lh4.googleusercontent.com/proxy/FGOONO9e6AqjWuJ1ITIki5sgnDN5mesmcYq9Kut-XhB32LqAjbX7KfkpP9feW2nEG-YAbKc3btNKWs3Pbdn_SLaKY5X2fRAygocdsz_x" style="margin-left: 990px;">
 </div>
 
 {% endblock content %}
