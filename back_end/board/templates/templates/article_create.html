@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baseball 커뮤니티 - 게시글 작성</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .menu {
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .menu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        .menu a:not(:last-child) {
+            border-right: 1px solid #ccc;
+        }
+        .form-container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea, select {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="#baseball">Baseball</a>
+        <a href="analysis">팀 전력분석</a>
+        <a href="predictions">경기 예측</a>
+        <a href="matchups">투수 vs 타자</a>
+        <a href="{% url 'article_list' %}">커뮤니티</a>
+    </div>
+    <div class="form-container">
+        <h1>게시글 작성</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" value="{{ form.title.value|default_if_none:'' }}">
+
+            <label for="team">팀</label>
+            <select id="team" name="team">
+                {% for value, name in form.fields.team.choices %}
+                    <option value="{{ value }}" {% if form.team.value == value %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="content">내용</label>
+            <textarea id="content" name="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+
+            <button type="submit">저장</button>
+        </form>
+        <a href="{% url 'article_list' %}">돌아가기</a>
+    </div>
+</body>
+</html>
