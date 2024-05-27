@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<title></title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+{% include "menu.html" %}
+{% block content %}
+
+<header class="text-gray-600 body-font bg-red-200 mr-24">
+    <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAToAAAChCAMAAABgSoNaAAABLFBMVEX///8dHRu+Bzf//f79//9wbm+9BzcAAABvb2/+//38///ABjjABjX///v//P+9CDboqbrqsMGrACaqACC3AC35+fnCwsLZfpatCzb81OHMc4jz0N5mZmawACtqamrzydXVmanIXHT/9v3/6e+nACq1LFHEY3p8fHwYGBbejqO4O1ji4uIWFhSGhobr6+upACberbyhoaHQ0NCwsLD/4u22RWPd3d1ERER3d3cmJiQ4ODasGD+WlpbMzMyqqqq5ubmXAACLMkibbHjVjJt2JjwACwB2MUIaHxlSUlFuHDOnADG9pKm2IEnNY37knLDbh52ZABu9dYelHEWaACu5Mk3CNleuNFTdqrqzSWDJJEzSXXf2jKv8tc26aH3abIqjABeYACSVRVc5MDHMuLqEyzjoAAAPx0lEQVR4nO1dCWPaRhYea8YCHdYYLGzsSCKWwCeHD4JxbMfNpklTb0LSpnWP3W6y2///H/a9N+KK8UGSFkPmiw8Qg5A+v3n3TBjT0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQGB9i0hdwv8GZAIaEBTxxYXGOz+GHeo1P9truOTh9A3s287gN9OHBOHlQ6myvrG2sb/wjCLLt2v7hwW69MOFLvW8AYUMAcyBuwFvczD3b2Ck2GktLed/3i98+rz5/nkHMHWVPlzV/fQiUOYvZAuQNaFvZKZZD3zVMw3FM+Cq+2Jr7bo6wVQX+tl7WljV7KTgXtmAW81Y76ydIm2sgXAfpM4rfbs0NAvnbCg7rk77q+wAL1JvwvCS3cZL3JciaYZgmfJkSYRRfVOc+xlYmcxx91bIHoobWAb691WeVPIgbMmeajtGFdJzii++uUKfYe3y6O+k7mBgsblloW73SWjEElhyYpI7R4076iPL3oOCeP69uXWGvmpnbbE36HiaEBQuNq7e6cRG6KG0pHFeGYVi+qOysr7159vCfp6e1dvDymIxs9WPR+0rJs4A6r7l24UsTTAPImwOiJ8NysfL6zWIpiePY6w4VVqHeOjyNHqONHWQvk6l9jRYDvZFnJyG6INKVLqg66S+9et15kMTpCHT0PE/YrBtVFFr70fEwe5njfWtSdzAxCC+30wDiHAccEdeUfrmyVkrUS4J4g8BM2BhfDAaz9bPNx4Mzt5o5OpvMDUwKgiUr5RBoQ/fNNGS+uJ5LPIpkBYZmlgLNa88efm99ORgUvWrm9OvxVFCSSpU8koaGwZH5ypvVsWL9Vu24T95W5mjmzYWafOiTxNtF3yHnFy1qZbuZJgHujvrpAHnVrSd/1TXfE1BqBNQXa75uSPDfXAlClz/ZBg3n2TYfizoLyJvL9AVvc9YnLQeHhLPVRyHOVOmapn+x1uSW0nBjm8rddt9gZF7OtpsCEgeSVzrxXfDhMFQNd0pgRa0FNAt96vjZcj9GLbQOnzw5vybqOjvqzdrM8WwrPJyVuSI4wVKCkfCL2zETSs1Zwu4Z0kI7CLrUtTaDKACcjhaqwmm1K3jVueW/4xb+blCuHPw0YGmx7KJVhUg1vASRI8OKqfUBK1HYjLIpda0IsLkZRcF1huDgcVfjVTMzyR2yx0HoWOeCHDlQdeW1hI32SAaoq0XRfoHz+un1vluh3Z20W5nzv+TSJwpBggf/FstAGoasstjh7Bqj2qduNxsp08lvMqD7XWuxNYNyB1GCZQuarYYBrpwjT0oM46yRVrVP3VkQHCJviBtOv7w1u9wJlUfPFU2kzjD9yiqzBTpzo0b3qVsOgmU0FbVa7cZo6+A4VXjV6qzZWaSOeasnaFfJJ8HwwQPddzfqXgZRVLvR593tGovq8Yxlj7Fww5qXPlUejPKjJhoIoXLsV/HxhK0/OWzfQh2rH2W6vvFsxRVAEo/XQ8qcmyEwZ9k3jB4yE4qyWnALdQPcZb/UVd8TcP6sgck5cIQrTXadbVVA6nbriAI6J/VCoV67Tepwzqa2InP6JS980oCJudfA3JxhylerqONG21YFpI4Q1Vug5bK1WjaKbo/vW8dbqZmdqeSnzZo/SVW4ebXKPfsaZ1gBAjEKvoJglx206UGUPbz1M7rUVR/PUiYA+yJyZaxAuK7/KAYDcZOuw/BfASStcHD+5PD84HbdXziqpkJ38OUufCIQYkCfCc8S3vbbBuHtD1zN1p7kiUEh5Lc0h/UH9z8AjhSiTIonA0PZjeJ9TyFwWopeUQa0W5xLUQKxw7CMUk3YT2dzD0YKfIoJAS5S3tFjxshX2JykVHTPx3GA4LY6N+adWQGE9OwMv/HvQoUhuIbrXMf7DWox5F0Ij/ezSgJL/ziCMU8gQXZ3LDCiRmEOylpYgIF0ItFN51k42VFVEr+9Ew4abN4HE0yMl32+H7AxsykUgDfPQyrgC/Qc5orV7cLd2zaJHsoRNSlylEOGImUtgCCqWxc2U2dSOXokDw7ZNhxRY9lQUIcDhbhyeFoADFzrgXi90j7S1BUfmmO91B0fkJcBBWiBJsCcPO/Lk0VTdgQsj99okO4pBIrGXm4kSsz21Et7CShFkdCTxT2Pij7pGJzK6oU9GOU96L3XUyqvP9IDEpMRH7MXA783eZD3FJhMj39cyqdo0JfC0iUXyY/0tFyCOcdKb2nEjwkK3MP3+Mr7DaygLX6TxzO8W2Ws9KGBxxsXJZiI2CTFxeLbBp0Nmwb2vslfwYemLabRTICSEvFPqkkTIjCp2lwdiP8dd8djScU1TWkUSyhApbIDwa1ZSbAu9jCPYYe/gY8XlwwDTlFchcedkPosQgjkUBOAsC6GDlZydxJgf2+JeswMGoO9ZvBSsYn2egq5w5A/pQ64AGcYi/3YfmjIRzBHf3LhgdujzpGmBOo4UucAp0jdgqLOlEidhfkDDOXCjRjVKGZOu9Qxog4em45U/aAmfmixyYQ9fQYWNDdSJxVzpisxxwmPMKAwd2I2DnUuUcdWfKzeOm6jQ4UOMYI6x6GIxXXw05wiVj+mT+pQHVlxhZoz/RC7XUHkXPU0fxmPJXV96rDz08A30RqLK9TBh4RhPkyRf9dEP3vSTIwNcB9gjv2wRvjPb9J0DSl/Vk/XnvGxqDMUdW98WhNgSL/StMFHAeqMAerwj+P+9ma7j4cxtrhMmomxYYFX0HfMfvdBC7n+Wu/lT9B1bCV00QwAQf5GDEHxFeoMU/48fBXoVk/dhB3uKFz3gScDqKOSIsZHSJ0cmzqcrmBxnMY2BrLDExZNkFHMYRQsLBXGYoAyfVI3BL7ug+lzkLqF9BA6J3BonAm7EkrUZ+jGGBcl1tV1flfX0YqL8kqC6QLMJMzE2sbPpE4OU2c40pHoB/eps9gv70nXmZJagAS/LXc1LfiSUqeEywzXvSHqmr82iDp4fvEmoWTVlE9VhS8pdY6kiqSx1BlwToClePsiVMvyZH4HvRcxC/P1OurcT6BOyt/Az3GlCW/NEXUSqFvAZcilnQZxZxrhxXY8kJ2ZZoymDsylBOrAHJbKoL8M2Y1h5XAMO0Sd4f++HUJMYpr+o39hXGYQddjRwpI3ZYzBIKhw849W0960a/JR0wKgzlTUsQHqQK+Dc4JZoVLZxenblTqIdoE6tJCjqFuPN3zsCjVB/gxsSVYTltk2CN4l9tqiB+MXOzGz0uz7FGMkdT5IDlCHKTqkDlxmpM5mD5dc8nox1z5C14XrcbNCDbWuOUQdqDeLJWv4V0DBM8vrq7aqf0wzrqPOcMs5RhEVxLjSPaFelBUf5py8SepY6cKkTIwxRB3EF/AvVwkNtVIvPEnE1Dt3I6iLLymYR0ljzVcQV0hphhsemIwi3ra5tIYmcqSuiwXfboDuxFTMEHVYW4M/yloD0zQwoy8w/J/GcuIARlAHkxS7/83wdRyDEXEl9nqCwwE0UtqtkmCmbbTU2RaoO1M1YvSpo9oQxhFe7pWkkK2YYNP8BO/7C2AEdZxt5zF9J8ud7TLaRBezeif/Xg9N7LAAy4tlnRHOCVHHE1B35N4ZKXVYEbKoZgGTNOcj/5Qlnvagou+c9KgTHkgOureOCUYRDSxGApjKxIXYjUWPvIrFJbNLHSjB0Eh1HZwE5jWNBFu8g8EDjweQw3yyNGDCTvt8HUUdePvNSuigh+JQYYJmIy7DhgPhRsypIqOoM0dQxzoNIE4FYk1hxX88GkDFpFh3RqnDLG/pAjdLMGnlzsl/QFKkQ0yGIEdY4r+eOlBh8esQqTMwmgDqdnzfl9IHa4MJdmOWpY553OOdPOgrCTGYWe4AFaqMYZCiU7HAR9S5PepArTV3QtxjgSpiQJ2qghiKOGOmpQ6CCAvoMqlMhm5JE6JaqgY2OjRb8Z4VdcaoCYtCSxko0HWCgdR19/ggOVY7zMwmdZwvgNFsVlDV490DU0AFOmRAo8e5Wq1IFtbpUYcCpaijVrFOg8QMU53xjksFWEdVLR1Vvp0B6tiv75eWlhrv/xiosqge9tK7RqORf1fCijSjDryly4T3ch6/fNNYauQbH1YxF7CCbQGN9796FFzh5lkbeNr3l4llxZf48CN8aKo/wDSDNx8QKEYdekG9kqhOHU8NEv1+skS974GHzm7SP0naJRXTgSamhNNPGEZhGsuww0hLY9YVIeg9hRcsjzJHqqigbrh33zztIKP3qHgLYqxuhIpdT6MYou7FKZc6bKvDpkIB5AwlMmy1eR1tlWgLaovjdn9RhUUddhY20nHsSlSjbNUehoNpUwqiCHQnjKXv9BemP6c9DGPU44Zbht2cAhpfPmz1JmKXdff3ULBUXyyfyq7OAVjYXoO9XdZQX3Rh+fNRwAZZ0WsfTUEtoFRHn8J2nSFYtOqEWjaHhODJy+Dz8BKXUyhbMFLZWWwqe9jvgtMgOz+IbLbWxnU6m5ub9GyzHcHvdna+ja+26RhBDQ/2J30Dk0OhFmV7fOCDg93dTeCvsHuAVLVa9dNoPjjYj1q1+fnabtQjTTH3FW1JdBV1EqsedTW1PqxWD+BwcNjCr/mgtR/Va/NRrd6njpaQzfy+MDejNT9IXXReOEDq2O4ZULe8HJzWibqgDuJJ1HVnNv6YsVXDY+MsGNJ12fp+1Je6lyR1B4dBYTOVxb6uC6Z9Ldjn47zHXXZ+s4W6br5Wbx2ATWjvtkDa5qPT+u4ZCNxmvbUc9SQ0WJ5V2zkG9oOezM23a8gLWdjsfDRfy6J6i9q1SNnddk/Xfc3GtY/CqXLSoqg/d+kZHcQH6dJiZDFdKRvM1FLrT0e9Gxr8+eKpwn//HAoZzo+6OB9YKqsxiIdlSYu18ytDeqydqRIys77F36eCe8zbwK4JrIktDix52O9uJrE52Qu8v8AoPqn4jnSlKS9WIYRX2Y+DdL+r6pGepdcAk252roh9ANLFHXgErcGup7twbG3N2qZDXw6cFoJ28hL3BjTDNUqzcBZ1p+vtm058tRC2jerudei62F3YWKS2E63obgendb8ea1aoadN1T7CSffBcK7o7gKowaYed4br+ZSLq/9OK7g6g/6MI9+3sNEyJJe9wzctqRXcXUK8Et7jwsBMH96Us/oHMfacV3d2A6xlB3all6E+rWtHdHRYWWksXuI7fKSrqtmZuG8m/BrQLDKo77KRW1GlFdzdgTAHqbiM0XFNJnVZ0d4XFLJuLpCINl6jTiu6uwBYB3B6rVJQ0YbVHNz5A3SF1WtGNDQvUHVCXaU/6QqYNlvB4shM+xW2GdeFrLOB/o8BKF0+ft9KMp8ZdIaix8+H3h9O5d98kQTt9svhPLqZ9VebfDz70S0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ2OG8H8RUb0/ygowiAAAAABJRU5ErkJggg==" alt="대체 텍스트" class="w-16 h-10">
+            <span class="ml-3 text-3xl">LG</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <class="mr-5 hover:text-gray-900 text-xl">
+                <form action="#">
+    
+                    <select name="temas" id="team" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                        <option value="javascript">vs Team</option>
+                        <option value="두산"> vs 두산</option>
+                        <option value="한화"> vs 한화</option>
+                        <option value="KIA"> vs 기아</option>
+                        <option value="키움"> vs 키움</option>
+                        <option value="KT"> vs KT</option>
+                        <option value="LG"> vs LG</option>
+                        <option value="롯데"> vs 롯데</option>
+                        <option value="NC"> vs NC</option>
+                        <option value="SAMSUNG"> vs 삼성</option>
+                        <option value="SSG"> vs SSG</option>
+                      </select>
+                    
+                </form>
+            </a>
+        </nav>
+        <button onclick="location.href='{% url 'analysis_result' %}'" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-14">
+            전력비교
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">리그 기록</h2>
+<p class="mb-8 leading-relaxed"> Rank | WAR | BT | SB | BR | Def | GS | GR | GS | GR | GS | GR</p>
+<br>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">팀별 대결 기록</h2>
+<div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+    <img class="object-cover object-center rounded" alt="hero" src="https://lh4.googleusercontent.com/proxy/FGOONO9e6AqjWuJ1ITIki5sgnDN5mesmcYq9Kut-XhB32LqAjbX7KfkpP9feW2nEG-YAbKc3btNKWs3Pbdn_SLaKY5X2fRAygocdsz_x" style="margin-left: 990px;">
+</div>
+
+{% endblock content %}
