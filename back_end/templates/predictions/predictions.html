@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script type=text/javascript>
+    function goResult() {
+        team_id = $("#team_id option:selected").val();
+        vs_team_id = $("#vs_team_id option:selected").val();
+        document.location.href = "predictions_result/" + team_id + "/" + vs_team_id;
+    }
+</script>
+<header class="text-gray-600 body-font bg-orange-200 mr-0">
+    <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            
+            <span class="ml-3 text-3xl">팀 선택</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <class="mr-5 hover:text-gray-900 text-xl">
+                <select name="team_id" id="team_id" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="">Home Team</option>
+                    {% for team in team_list %}
+                        <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                    {% endfor %}
+                </select>   
+                <select name="vs_team_id" id="vs_team_id" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="javascript">Away Team</option>
+                    {% for team in team_list %}
+                        <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                    {% endfor %}
+                </select>   
+            </a>
+            
+        </nav>
+        <button onclick="goResult()" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-14">
+            승부예측
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+<br>
+
+
+{% endblock content %}

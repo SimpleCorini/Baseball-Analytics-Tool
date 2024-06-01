@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<title></title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    {% include "menu.html" %}
+    {% block content %}
+
+    {% load socialaccount %}
+    <h2>Google Login</h2>
+    <a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
+    {% if user.is_authenticated %}
+    <p>You are signed in as {{ user.email }}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% endif %}
+
+    {% endblock content %}
+</body>
+</html>

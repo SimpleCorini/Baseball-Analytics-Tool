@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<header class="text-gray-600 body-font bg-red-200 mr-0">
+    <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <img src="/static/{{ team.image_data }}" alt="대체 텍스트" class="w-16 h-10">
+            <span class="ml-3 text-3xl">{{ team.team_name }}</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <class="mr-5 hover:text-gray-900 text-xl">
+                <form action="#">
+    
+                    <select name="temas" id="team" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                        <option value="javascript">vs Team</option>
+                        {% for team1 in team_list %}
+                            <option value="{{ team1.team_id }}"> vs {{ team1.team_name }}</option>
+                        {% endfor %}
+                      </select>
+                    
+                </form>
+            </a>
+        </nav>
+        <button onclick="location.href=''" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-14">
+            전력비교
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">리그 기록</h2>
+<p class="mb-8 leading-relaxed"> Rank | WAR | BT | SB | BR | Def | GS | GR | GS | GR | GS | GR</p>
+<p class="mb-8 leading-relaxed"> {{ record_team.ranking }} | {{ record_team.war }} | {{ record_team.waa_bt }} | {{ record_team.waa_sb }} | {{ record_team.waa_br }} | {{ record_team.rep_wins }} | {{ record_team.waa_gs }} | {{ record_team.waa_gr }} | {{ record_team.rep_wins_gs }} | {{ record_team.rep_wins_gr }} | {{ record_team.war_gs }} | {{ record_team.war_gr }}</p>
+<br>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">팀별 대결 기록</h2>
+<div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+    <table>
+        <thead>
+        <tr>
+            <th>대결</th>
+            <th>승</th>
+            <th>무</th>
+            <th>패</th>
+            <th>승률</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for team_matchup in record_team_matchup_list %}
+            <tr>
+                <td>{{ team_matchup.vs_team_name }}</td>
+                <td>{{ team_matchup.win }}</td>
+                <td>{{ team_matchup.draw }}</td>
+                <td>{{ team_matchup.lose }}</td>
+                <td>{{ team_matchup.win_rate }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">팀별 분석</h2>
+<div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+    <table>
+        <thead>
+        <tr>
+            <th>부분</th>
+            <th>기록</th>
+            <th>순위</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>타격</td>
+            <td>{{ record_team.batting_avg }}</td>
+            <td>{{ record_team.batting_avg_ranking }}위</td>
+        </tr>
+        <tr>
+            <td>주루</td>
+            <td>{{ record_team.brraa }}</td>
+            <td>{{ record_team.brraa_ranking }}위</td>
+        </tr>
+        <tr>
+            <td>수비</td>
+            <td>{{ record_team.waa_pos }}</td>
+            <td>{{ record_team.waa_pos_ranking }}위</td>
+        </tr>
+        <tr>
+            <td>선발</td>
+            <td>{{ record_team.starter_war }}</td>
+            <td>{{ record_team.starter_war_ranking }}위</td>
+        </tr>
+        <tr>
+            <td>구원</td>
+            <td>{{ record_team.relief_war }}</td>
+            <td>{{ record_team.relief_war_ranking }}위</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">추천</h2>
+<div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+    <table>
+        <thead>
+        <tr>
+            <th>선수명</th>
+            <th>포지션</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for recommand_player in recommand_player_list %}
+            <tr>
+                <td>{{ recommand_player.player_name }}</td>
+                <td>{{ recommand_player.position_no }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>    
+    <img class="object-cover object-center rounded" alt="hero" src="https://lh4.googleusercontent.com/proxy/FGOONO9e6AqjWuJ1ITIki5sgnDN5mesmcYq9Kut-XhB32LqAjbX7KfkpP9feW2nEG-YAbKc3btNKWs3Pbdn_SLaKY5X2fRAygocdsz_x" style="margin-left: 990px;">
+</div>
+
+{% endblock content %}

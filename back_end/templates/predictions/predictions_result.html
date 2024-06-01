@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<header class="text-gray-600 body-font bg-orange-200 mr-0">
+    <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            
+            <span class="ml-3 text-3xl">승리 예측</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <img src="/static/{{ team.image_data }}" alt="대체 텍스트" class="w-16 h-10">
+                <span class="ml-3 text-3xl">{{ team.team_name }}</span>
+            </a>
+            <span class="ml-3 text-3xl">vs</span>
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <img src="/static/{{ vs_team.image_data }}" alt="대체 텍스트" class="w-16 h-10">
+                <span class="ml-3 text-3xl">{{ vs_team.team_name }}</span>
+            </a>        
+        </nav>
+        {% comment %} <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <class="mr-5 hover:text-gray-900 text-xl">
+                <select name="temas" id="team" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="javascript">Home Team</option>
+                    <option value="두산">두산</option>
+                    <option value="한화">한화</option>
+                    <option value="KIA">기아</option>
+                    <option value="키움">키움</option>
+                    <option value="KT">KT</option>
+                    <option value="LG"> LG</option>
+                    <option value="롯데">롯데</option>
+                    <option value="NC">NC</option>
+                    <option value="SAMSUNG">삼성</option>
+                    <option value="SSG">SSG</option>
+                </select>   
+                <select name="temas" id="team" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="javascript">Away Team</option>
+                    <option value="두산">두산</option>
+                    <option value="한화">한화</option>
+                    <option value="KIA">기아</option>
+                    <option value="키움">키움</option>
+                    <option value="KT">KT</option>
+                    <option value="LG"> LG</option>
+                    <option value="롯데">롯데</option>
+                    <option value="NC">NC</option>
+                    <option value="SAMSUNG">삼성</option>
+                    <option value="SSG">SSG</option>
+                </select>   
+            </a>
+            
+        </nav> {% endcomment %}
+        <button onclick="location.href='{% url 'predictions' %}'" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-14">
+            뒤로 가기
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">팀별 대결 기록</h2>
+<div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+    <table>
+        <thead>
+        <tr>
+            <th>대결</th>
+            <th>승</th>
+            <th>무</th>
+            <th>패</th>
+            <th>승률</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ record_team_matchup.vs_team_name }}</td>
+                <td>{{ record_team_matchup.win }}</td>
+                <td>{{ record_team_matchup.draw }}</td>
+                <td>{{ record_team_matchup.lose }}</td>
+                <td>{{ record_team_matchup.win_rate }}</td>
+            </tr>
+            {% comment %} {% for team_matchup in record_team_matchup %}
+            <tr>
+                <td>{{ team_matchup.vs_team_name }}</td>
+                <td>{{ team_matchup.win }}</td>
+                <td>{{ team_matchup.draw }}</td>
+                <td>{{ team_matchup.lose }}</td>
+                <td>{{ team_matchup.win_rate }}</td>
+            </tr>
+            {% endfor %} {% endcomment %}
+        </tbody>
+    </table>
+</div>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">키플레이어</h2>
+<div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+    <table>
+        <thead>
+            <tr>
+                <th>{{ team.team_name }}</th>
+                <th>VS</th>
+                <th>{{ vs_team.team_name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ record_key_player.batter_player_name }}</td>
+                <td>선수</td>
+                <td>{{ record_vs_key_player.batter_player_name }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.batting_avg }}</td>
+                <td>타율</td>
+                <td>{{ record_vs_key_player.batting_avg }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.hits }}</td>
+                <td>안타</td>
+                <td>{{ record_vs_key_player.hits }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.hr }}</td>
+                <td>홈런</td>
+                <td>{{ record_vs_key_player.hr }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.rbi }}</td>
+                <td>타점</td>
+                <td>{{ record_vs_key_player.rbi }}</td>
+            </tr>
+            <tr>
+                <td colspan='3' style="text-align: center;">상대전적</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.batting_avg }}</td>
+                <td>타율</td>
+                <td>{{ record_vs_key_player.batting_avg }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.hits }}</td>
+                <td>안타</td>
+                <td>{{ record_vs_key_player.hits }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.hr }}</td>
+                <td>홈런</td>
+                <td>{{ record_vs_key_player.hr }}</td>
+            </tr>
+            <tr>
+                <td colspan='3' style="text-align: center;">최근5경기</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.recent_batting_avg }}</td>
+                <td>타율</td>
+                <td>{{ record_vs_key_player.recent_batting_avg }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.recent_hits }}</td>
+                <td>안타</td>
+                <td>{{ record_vs_key_player.recent_hits }}</td>
+            </tr>
+            <tr>
+                <td>{{ record_key_player.recent_hr }}</td>
+                <td>홈런</td>
+                <td>{{ record_vs_key_player.recent_hr }}</td>
+            </tr>     
+        </tbody>
+    </table>
+</div>
+<br>
+<h2 class="title-font sm:text-3xl text-3xl mb-4 font-medium text-gray-900">승부확률</h2>
+<p class="mb-8 leading-relaxed"> {{ team.team_name }} 승</p>
+<p class="mb-8 leading-relaxed"> {{ prediction_team_match.prediction_win_rate }}%</p>
+<p class="mb-8 leading-relaxed"> {{ vs_team.team_name }} 승</p>
+<p class="mb-8 leading-relaxed"> {% widthratio prediction_team_match.prediction_win_rate|add:"-100" 1 -1 %}%</p>
+
+<br>
+
+{% endblock content %}

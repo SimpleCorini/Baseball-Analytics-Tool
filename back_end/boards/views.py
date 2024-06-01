@@ -20,7 +20,7 @@ def article_list(request):
     articles = paginator.get_page(page)
 
     context = {'article_list': articles}
-    return render(request, "article_list.html", context)
+    return render(request, "boards/article_list.html", context)
 
 
 @login_required
@@ -42,7 +42,7 @@ def article_create(request):
         form = PostForm()
 
     context = {'form': form}
-    return render(request, 'article_create.html', context)
+    return render(request, 'boards/article_create.html', context)
 
 
 @login_required
@@ -81,7 +81,7 @@ def article_detail(request, pk):
         'comment_likes': comment_likes,
         'edit_comment_id': None,  # 수정 중인 댓글 ID
     }
-    return render(request, 'article.html', context)
+    return render(request, 'boards/article.html', context)
 
 @login_required
 def delete_article(request, pk):
@@ -107,7 +107,7 @@ def edit_article(request, pk):
         form = PostForm(instance=article)
 
     context = {'form': form, 'article': article}
-    return render(request, 'article_edit.html', context)
+    return render(request, 'boards/article_edit.html', context)
 
 
 
@@ -156,7 +156,7 @@ def edit_comment(request, comment_id):
         'comment_form': form,
         'edit_comment_id': comment.id,
     }
-    return render(request, 'article.html', context)
+    return render(request, 'boards/article.html', context)
 
 
 @login_required

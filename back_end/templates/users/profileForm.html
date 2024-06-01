@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.team-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+</style> 
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <span class="ml-3 text-3xl">프로필 설정</span>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_nickname">별명:</label>
+                <input type="text" name="nickname" id="id_nickname" value="{{ form.nickname.value }}">
+            </div>
+            <div>
+                <fieldset>
+                    <legend>좋아하는 팀 선택:</legend>
+                    <div class="team-row">
+                        {{ form.favorite_team }}
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit">저장</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}

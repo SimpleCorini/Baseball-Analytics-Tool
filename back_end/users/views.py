@@ -9,14 +9,12 @@ def home(request):
         profile, created = Profile.objects.get_or_create(user=request.user)
         print("is_authenticated : true", profile.nickname, profile.favorite_team)
         if profile.nickname == "" or profile.favorite_team == "":
-            return redirect("/profileForm")
+            return redirect("/profile_create")
         else:
-            return render(request, "main.html")
-    else:
+            return redirect("/analysis")
+    else:   
         print("is_authenticated : false")
-        return render(request, "home.html")
-
-LOGIN_REDIRECT_URL = '/'
+        return render(request, "analysis/analysis.html")
 
 def logout_view(request):
     logout(request)
@@ -36,4 +34,17 @@ def set_profile(request):
             return redirect("/")
     else:
         form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profileForm.html', {'form': form})
+    return render(request, 'users/profileForm.html', {'form': form})
+
+@login_required
+def update_profile(request):
+    profile = Profile.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'users/profileForm.html', {'form': form})

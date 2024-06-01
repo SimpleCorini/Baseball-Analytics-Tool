@@ -1,0 +1,44 @@
+{% block content %}
+
+{% load socialaccount %}
+<header class="text-gray-600 body-font bg-blue-200 mr-0">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIXwG-sAGygfAdpGuYBx7T3usghvsJdIH8aeqExDSmEQ&s" alt="대체 텍스트" class="w-16 h-10">
+            <span class="ml-3 text-3xl">BaseBall</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <a href="{% url 'analysis' %}" class="mr-5 hover:text-gray-900 text-xl">팀 전력분석</a>
+            <a href="{% url 'predictions' %}" class="mr-5 hover:text-gray-900 text-xl">경기 예측</a>
+            <a href="{% url 'matchups' %}" class="mr-5 hover:text-gray-900 text-xl">투수 vs 타자</a>
+            <a href="{% url 'article_list' %}" class="mr-5 hover:text-gray-900 text-xl">커뮤니티</a>
+        </nav>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                  <button type="submit" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-2">
+                로그아웃
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </form>
+
+            <button onclick="location.href='{% url 'profile_update' %}'" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-2">
+                정보수정
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        {% else %}
+            <button onclick="location.href='{% url 'account_login' %}'" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-2">
+                로그인
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        {% endif %}
+    </div>
+</header>
+
+{% endblock content %}

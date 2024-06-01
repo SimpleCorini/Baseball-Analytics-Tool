@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include "article_style.html" %}
+
+<section class="text-gray-600 body-font">
+    <div class="form-container px-5 py-24 mx-auto">
+        <div>
+            <div>
+                <span class="ml-3 text-3xl">{{ article.title }}</span>
+            </div>
+            <div class="meta">
+                작성자: {{ article.nickname }} | 작성일: {{ article.reg_date }} | 조회수: {{ article.count }}
+            </div>
+        </div>
+        <div class="article-content">
+            {{ article.content }}
+        </div>
+        <div class="actions">
+            {% if article.nickname == request.user.profile.nickname %}
+            <a href="{% url 'edit_article' article.pk %}">수정</a> |
+            <a href="{% url 'delete_article' article.pk %}">삭제</a> |
+            {% endif %}
+            <a href="{% url 'article_list' %}">목록으로</a>
+            <div>
+                <form method="post" action="{% url 'toggle_like' 'article' article.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">좋아요: <span class="like-count">{{ article.like_count }}</span></button>
+                </form>
+            </div>
+        </div>
+        <div class="comments">
+            <h2>댓글</h2>
+            {% for comment in comments %}
+            <div class="comment">
+                <div class="meta">{{ comment.nickname }} | {{ comment.reg_date }}</div>
+                {% if comment.nickname == request.user.profile.nickname %}
+                <a href="#" onclick="document.getElementById('edit-form-{{ comment.id }}').style.display='block'; return false;">수정</a> |
+                <a href="{% url 'delete_comment' comment.pk %}">삭제</a>
+                {% endif %}
+                <div class="content">{{ comment.content }}</div>
+                <div>
+                    <form method="post" action="{% url 'toggle_like' 'comment' comment.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">좋아요: <span class="like-count">{{ comment.like_count }}</span></button>
+                    </form>
+                </div>
+                <div id="edit-form-{{ comment.id }}" class="edit-form" style="display: {% if edit_comment_id == comment.id %}block{% else %}none{% endif %};">
+                    <form method="post" action="{% url 'edit_comment' comment.pk %}">
+                        {% csrf_token %}
+                        <textarea name="content">{{ comment.content }}</textarea>
+                        <button type="submit">수정 완료</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="comment-form">
+                <form method="post" action="{% url 'add_comment' article.pk %}">
+                    {% csrf_token %}
+                    <textarea name="content" placeholder="댓글을 입력하세요..."></textarea>
+                    <button type="submit">댓글 달기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+    
+{% endblock content %}    

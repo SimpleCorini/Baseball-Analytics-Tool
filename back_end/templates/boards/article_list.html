@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include "article_style.html" %}
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <div>
+            <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+                <div>
+                    <span class="ml-3 text-3xl">커뮤니티</span>
+                </div>
+                <a class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-2" href="{% url 'article_create' %}" class="create-post">글 작성</a>
+            </div>
+            <table class="table-auto">
+                <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>팀</th>
+                    <th>날짜</th>
+                    <th>조회수</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in article_list %}
+                    <tr>
+                        <td><a href="{% url 'article_detail' article.pk %}" class="article-link">{{ article.title }}</a></td>
+                        <td>{{ article.nickname }}</td>
+                        <td>{{ article.type_team }}</td>
+                        <td>{{ article.reg_date|date:"Y-m-d-h-i" }}</td>
+                        <td>{{ article.count }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">게시글이 없습니다.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation">
+                {% for i in article_list.paginator.page_range %}
+                    <button onclick="location.href='?page={{ i }}'">{{ i }}</button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}    

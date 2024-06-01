@@ -17,10 +17,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = '/'
+# LOGIN_DIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 # Application definition
 
 SITE_ID = 5
@@ -33,9 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django.contrib.sites",
+    "baseball",
     "users",
     "boards",
     "analysis",
+    "predictions",
+    "matchups",
+
+    'rest_framework',
 
     "allauth",
     "allauth.account",
@@ -66,11 +74,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'baseball.urls'
 
+import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': []
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +91,13 @@ TEMPLATES = [
         },
     },
 ]
+
+# STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, 'static')
+]
+
 
 WSGI_APPLICATION = 'baseball.wsgi.application'
 
@@ -129,9 +145,6 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend"
 )
-
-LOGIN_DIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
 
 # local_settings.py
 try:

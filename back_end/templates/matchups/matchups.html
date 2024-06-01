@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script type=text/javascript>
+	$(function() {
+		$("#pitcher_team_id").change(function() {
+			playerList("P", this.value, $("#pitcher_player_id"))
+		});	
+
+		$("#batter_team_id").change(function() {
+			playerList("B", this.value, $("#batter_player_id"))
+		});	
+	});
+
+	function playerList(kind, team_id, player_selectbox) {
+		player_selectbox.empty();
+		var option = new Option('PLAYER', '');
+		player_selectbox.append(option);
+
+		var url = "/matchups/player_list/" + kind + "/" + team_id; 
+		
+		$.ajax({
+			url		: url,
+			type	: "GET",
+			dataType: "JSON",
+			success : function(data) {
+				if(data.length > 0) {
+					for (var i = 0; i < data.length; i++) {
+						var item = data[i];
+						var player = new Option(item.player_name, item.player_id);
+						player_selectbox.append(player);
+						player_selectbox.val(item.player_id);
+					}
+					$("#" + player_selectbox.attr('id') + " option:eq(0)").prop("selected", true);
+				}
+				else {
+					alert("선수 정보가 없습니다.");
+				}
+			},
+			error : function(xhr,status,error) {
+				alert("시스템 관리자에게 문의하세요");
+			} 
+		});
+	}
+
+    function goResult() {
+        pitcher_team_id = $("#pitcher_team_id option:selected").val();
+        pitcher_player_id = $("#pitcher_player_id option:selected").val();
+        batter_team_id = $("#batter_team_id option:selected").val();
+        batter_player_id = $("#batter_player_id option:selected").val();
+        document.location.href = "matchups_result/" + pitcher_team_id + "/" + pitcher_player_id + "/" + batter_team_id + "/" + batter_player_id;
+    }	
+</script>
+<header class="text-gray-600 body-font bg-yellow-100 mr-0">
+    <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            
+            <span class="ml-3 text-3xl">투수 선택</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <class="mr-5 hover:text-gray-900 text-xl">
+                <select name="pitcher_team_id" id="pitcher_team_id" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="">Pitcher Team</option>
+                    {% for team in team_list %}
+                        <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                    {% endfor %}
+                </select>   
+                <select name="pitcher_player_id" id="pitcher_player_id" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="">PLAYER</option>
+                </select>   
+            </a>
+            
+        </nav>
+    </div>
+</header>
+
+<header class="text-gray-600 body-font bg-green-100 mr-0">
+    <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            
+            <span class="ml-3 text-3xl">타자 선택</span>
+        </a>
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
+            <class="mr-5 hover:text-gray-900 text-xl">
+                <select name="batter_team_id" id="batter_team_id" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="">Batter Team</option>
+                    {% for team in team_list %}
+                        <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                    {% endfor %}
+                </select>   
+                <select name="batter_player_id" id="batter_player_id" class="appearance-none border border-gray-400 rounded-md py-2 px-3 bg-white focus:outline-none focus:border-blue-500">
+                    <option value="javascript">PLAYER</option>
+                </select>   
+            </a>
+            
+        </nav>
+        {% comment %} <button onclick="location.href='{% url 'matchups_result' %}'" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-14"> {% endcomment %}
+		<button onclick="goResult()" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 mr-14">
+				투타비교
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+
+{% endblock content %}

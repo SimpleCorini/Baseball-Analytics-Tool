@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include "article_style.html" %}
+<section class="text-gray-600 body-font">
+    <div class="form-container px-5 py-24 mx-auto">
+        <div>
+            <span class="ml-3 text-3xl">게시글 작성</span>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" value="{{ form.title.value|default_if_none:'' }}">
+
+            <label for="team">팀</label>
+            <select id="team" name="team">
+                {% for value, name in form.fields.team.choices %}
+                    <option value="{{ value }}" {% if form.team.value == value %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="content">내용</label>
+            <textarea id="content" name="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+
+            <button type="submit">저장</button>
+        </form>
+        <a href="{% url 'article_list' %}">돌아가기</a>
+    </div>
+</section>    
+{% endblock content %}    
