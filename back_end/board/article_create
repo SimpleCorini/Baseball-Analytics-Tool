@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h1 style="text-align: center;">게시글 작성</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" value="{{ form.title.value|default_if_none:'' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+
+        <label for="team">팀</label>
+        <select id="team" name="team" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            {% for value, name in form.fields.team.choices %}
+                <option value="{{ value }}" {% if form.team.value == value %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="10" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">{{ form.content.value|default_if_none:'' }}</textarea>
+
+        <button type="submit" style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">저장</button>
+    </form>
+    <a href="{% url 'article_list' %}" class="back-link" style="display: block; margin-top: 10px; text-align: center; color: #007bff; text-decoration: none;">돌아가기</a>
+</div>
+{% endblock %}
