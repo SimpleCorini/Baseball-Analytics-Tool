@@ -47,9 +47,9 @@ def getPlayer(player_id):
 def getTeamPlayerList(kind, team_id):
     try:
         if kind == 'P':         # 투수
-            playerList = MasterPlayer.objects.filter(pk=team_id, position_no="1")
+            playerList = MasterPlayer.objects.filter(pk=team_id, position_no="P")
         else:                   # 타자
-            playerList = MasterPlayer.objects.filter(pk=team_id).exclude(position_no="1")
+            playerList = MasterPlayer.objects.filter(pk=team_id).exclude(position_no="P")
     except:
         playerList = None
     return playerList
